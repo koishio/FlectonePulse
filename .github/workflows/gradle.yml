@@ -25,8 +25,8 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build Paper module
-        run: ./gradlew :paper:shadowJar --no-daemon
+      - name: Build final JAR
+        run: ./gradlew buildFinalJar --no-daemon
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
