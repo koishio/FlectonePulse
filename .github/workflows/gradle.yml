@@ -28,9 +28,9 @@ jobs:
       - name: Build final JAR
         run: ./gradlew buildFinalJar --no-daemon
 
-      - name: Upload artifact
+      - name: Upload all JARs
         uses: actions/upload-artifact@v4
         with:
-          name: FlectonePulse-Paper
-          path: paper/build/libs/*.jar
-          if-no-files-found: error
+          name: FlectonePulse-AllJars
+          path: |
+            **/build/libs/*.jar
