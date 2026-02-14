@@ -199,7 +199,7 @@ public class FPlayerService {
         System.out.println("[FlectonePulse-DEBUG] getFPlayer called for uuid: " + uuid;
         if (uuid == null) {
             if (platformPlayerAdapter.isConsole(player)) {
-                System.out.println("[FlectonePulse-DEBUG] getFPlayer return(isConsole)";
+                System.out.println("[FlectonePulse-DEBUG] getFPlayer return(isConsole)");
                 return getFPlayer(-1);
             }
 
