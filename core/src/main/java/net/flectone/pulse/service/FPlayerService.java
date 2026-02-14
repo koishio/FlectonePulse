@@ -79,7 +79,7 @@ public class FPlayerService {
 
     public FPlayer addFPlayer(UUID uuid, String name) {
         // insert to database
-        System.out.println("[FlectonePulse-DEBUG] addFPlayer called for " + name + " (" + uuid + ")");
+        // System.out.println("[FlectonePulse-DEBUG] addFPlayer called for " + name + " (" + uuid + ")");
         fPlayerRepository.save(uuid, name);
 
         moderationService.invalidate(uuid);
@@ -87,7 +87,7 @@ public class FPlayerService {
         // player can be in cache and be unknown
         // or uuid and name can be invalid
         FPlayer fPlayer = fPlayerRepository.get(uuid);
-        System.out.println("[FlectonePulse-DEBUG] After get from repo: " + name + " or " + fPlayer.getName() + ", id=" + fPlayer.getUuid());
+        // System.out.println("[FlectonePulse-DEBUG] After get from repo: " + name + " or " + fPlayer.getName() + ", id=" + fPlayer.getUuid());
         if (fPlayer.isUnknown() || !fPlayer.getUuid().equals(uuid) || !fPlayer.getName().equals(name)) {
             fPlayerRepository.invalid(uuid);
             fPlayer = fPlayerRepository.get(uuid);
@@ -96,7 +96,7 @@ public class FPlayerService {
         // most often this is not a real IP (this is server ip) on login,
         // need to update it before calling saveFPlayerData from PlayerJoinEvent
         fPlayer.setIp(platformPlayerAdapter.getIp(fPlayer));
-        System.out.println("[FlectonePulse-DEBUG] IP for player: " + platformPlayerAdapter.getIp(fPlayer));
+        // System.out.println("[FlectonePulse-DEBUG] IP for player: " + platformPlayerAdapter.getIp(fPlayer));
         // player is not fully online on server,
         // but it should already be
         fPlayer.setOnline(true);
@@ -193,13 +193,13 @@ public class FPlayerService {
 
     public FPlayer getFPlayer(Object player) {
         String name = platformPlayerAdapter.getName(player);
-        System.out.println("[FlectonePulse-DEBUG] getFPlayer called for " + name);
+        // System.out.println("[FlectonePulse-DEBUG] getFPlayer called for " + name);
         if (name.isEmpty()) return FPlayer.UNKNOWN;
         UUID uuid = platformPlayerAdapter.getUUID(player);
-        System.out.println("[FlectonePulse-DEBUG] getFPlayer called for uuid: " + uuid);
+        // System.out.println("[FlectonePulse-DEBUG] getFPlayer called for uuid: " + uuid);
         if (uuid == null) {
             if (platformPlayerAdapter.isConsole(player)) {
-                System.out.println("[FlectonePulse-DEBUG] getFPlayer return(isConsole)");
+                // System.out.println("[FlectonePulse-DEBUG] getFPlayer return(isConsole)");
                 return getFPlayer(-1);
             }
 
@@ -208,7 +208,7 @@ public class FPlayerService {
 
         FPlayer fPlayer = getFPlayer(uuid);
         if (fPlayer.isUnknown()) {
-            System.out.println("[FlectonePulse-DEBUG] Player " + name + " is unknown, calling addFPlayer...");
+            // System.out.println("[FlectonePulse-DEBUG] Player " + name + " is unknown, calling addFPlayer...");
             fPlayer = addFPlayer(uuid, name);
             return new FPlayer(name, uuid, platformPlayerAdapter.getEntityTranslationKey(player));
         }
