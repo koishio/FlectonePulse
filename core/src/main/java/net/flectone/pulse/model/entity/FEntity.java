@@ -11,7 +11,7 @@ import java.util.UUID;
 public class FEntity {
 
     public static final UUID UNKNOWN_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
-    public static final String UNKNOWN_NAME = "UNKNOWN_FLECTONEPULSE";
+    public static final String UNKNOWN_NAME = "UNKNOWN_NAME_MAY_BOT";
     public static final String UNKNOWN_TYPE = "UNKNOWN";
 
     private final String name;
