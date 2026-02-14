@@ -2,9 +2,9 @@ name: Build FlectonePulse
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "**" ]          # 监听所有分支
   pull_request:
-    branches: [ "master" ]
+    branches: [ "**" ]          # 可选，所有分支的 PR 也触发
 
 jobs:
   build:
