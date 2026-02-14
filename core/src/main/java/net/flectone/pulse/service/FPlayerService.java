@@ -193,10 +193,10 @@ public class FPlayerService {
 
     public FPlayer getFPlayer(Object player) {
         String name = platformPlayerAdapter.getName(player);
-        System.out.println("[FlectonePulse-DEBUG] getFPlayer called for " + name;
+        System.out.println("[FlectonePulse-DEBUG] getFPlayer called for " + name);
         if (name.isEmpty()) return FPlayer.UNKNOWN;
         UUID uuid = platformPlayerAdapter.getUUID(player);
-        System.out.println("[FlectonePulse-DEBUG] getFPlayer called for uuid: " + uuid;
+        System.out.println("[FlectonePulse-DEBUG] getFPlayer called for uuid: " + uuid);
         if (uuid == null) {
             if (platformPlayerAdapter.isConsole(player)) {
                 System.out.println("[FlectonePulse-DEBUG] getFPlayer return(isConsole)");
