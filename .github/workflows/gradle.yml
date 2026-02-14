@@ -1,42 +1,36 @@
-name: Build FlectonePulse
+name: Build FlectonePulse (Paper)
 
 on:
   push:
-    branches: [ "**" ]          # 监听所有分支
+    branches: [ fix_unknown ]
   pull_request:
-    branches: [ "**" ]          # 可选，所有分支的 PR 也触发
+    branches: [ fix_unknown ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: fix_unknown
 
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'temurin'
+          java-version: '21'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          cache-read-only: false
-
-      - name: Grant execute permission for gradlew
+      - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build with Gradle (shadowJar)
-        run: ./gradlew shadowJar --no-daemon
+      - name: Build Paper module
+        run: ./gradlew :paper:shadowJar --no-daemon
 
-      - name: Upload build artifacts
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FlectonePulse-JARs
-          path: |
-            **/build/libs/*.jar
-            !**/build/libs/*-sources.jar
-            !**/build/libs/*-javadoc.jar
+          name: FlectonePulse-Paper
+          path: paper/build/libs/*.jar
+          if-no-files-found: error
