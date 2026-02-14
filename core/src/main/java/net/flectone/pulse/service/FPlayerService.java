@@ -87,7 +87,7 @@ public class FPlayerService {
         // player can be in cache and be unknown
         // or uuid and name can be invalid
         FPlayer fPlayer = fPlayerRepository.get(uuid);
-        System.out.println("[FlectonePulse-DEBUG] After get from repo: " + fPlayer.name() + ", id=" + fPlayer.id());
+        System.out.println("[FlectonePulse-DEBUG] After get from repo: " + name + " or " + fPlayer.getName() + ", id=" + fPlayer.getUuid());
         if (fPlayer.isUnknown() || !fPlayer.getUuid().equals(uuid) || !fPlayer.getName().equals(name)) {
             fPlayerRepository.invalid(uuid);
             fPlayer = fPlayerRepository.get(uuid);
@@ -96,7 +96,7 @@ public class FPlayerService {
         // most often this is not a real IP (this is server ip) on login,
         // need to update it before calling saveFPlayerData from PlayerJoinEvent
         fPlayer.setIp(platformPlayerAdapter.getIp(fPlayer));
-        System.out.println("[FlectonePulse-DEBUG] IP for player: " + ip);
+        System.out.println("[FlectonePulse-DEBUG] IP for player: " + platformPlayerAdapter.getIp(fPlayer));
         // player is not fully online on server,
         // but it should already be
         fPlayer.setOnline(true);
